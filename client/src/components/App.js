@@ -62,6 +62,7 @@ function App() {
 
   function updateCase(event) {
     event.preventDefault()
+
     fetch(`/cases/${idToUpdate}`, {
       method: "PATCH",
       headers: {
@@ -73,12 +74,12 @@ function App() {
       .then(response => response.json())
       .then(updatedCase => {
         setCases(cases => {
-          return cases.map(cases => {
-            if (cases.id === updatedCase.id) {
+          return cases.map(caseItem => {
+            if (caseItem.id === updatedCase.id) {
               return updatedCase
             }
             else {
-              return cases
+              return caseItem
             }
           })
         })

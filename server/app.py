@@ -267,7 +267,7 @@ class CasesById(Resource):
     def get(self, id):
         case = Case.query.filter(Case.id == id).first()
         response_body = case.to_dict()
-
+        print(case)
         if not case:
             response_body = {
                 "error": "Case not found"

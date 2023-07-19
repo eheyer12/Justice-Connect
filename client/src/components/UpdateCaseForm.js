@@ -7,23 +7,44 @@ function UpdateCaseForm({ updateCase, setIdToUpdate, updatePatchFormData, cases 
     return (
         <div className="case-form">
             <h2>Update Case Form</h2>
-            {updateFormSubmitted ? <h1>Case Updated!</h1> :
-                <form onSubmit={event => {
-                    updateCase(event)
-                    setUpdateFormSubmitted(updateFormSubmitted => !updateFormSubmitted)
-                }}>
+            {updateFormSubmitted ? (
+                <h1>Case Updated!</h1>
+            ) : (
+                <form
+                    onSubmit={event => {
+                        updateCase(event)
+                    }}
+                >
                     <label>Choose a Case: </label>
-                    <select onChange={(event) => {
-                        setIdToUpdate(event.target.value)
-                    }} name="id">
-                        {cases.map(cases => {
-                            return <option key={cases.id} value={cases.id}>{`${cases.id}: ${cases.title}`}</option>
+                    <select
+                        onChange={(event) => {
+                            setIdToUpdate(event.target.value)
+                        }}
+                        name="id"
+                    >
+                        {cases.map(caseItem => {
+                            return (
+                                <option key={caseItem.id} value={caseItem.id}>
+                                    {`${caseItem.id}: ${caseItem.title}`}
+                                </option>
+                            );
                         })}
                     </select>
-                    <input onChange={updatePatchFormData} type="text" name="name" placeholder="Law Type" />
-                    <input onChange={updatePatchFormData} type="text" name="summary" placeholder="Summary" />
+                    <input
+                        onChange= {updatePatchFormData}
+                        type="text"
+                        name="title"
+                        placeholder="Law Type"
+                    />
+                    <input
+                        onChange={updatePatchFormData}
+                        type="text"
+                        name="body"
+                        placeholder="Summary"
+                    />
                     <input type="submit" value="Update Case" />
-                </form>}
+                </form>
+            )}
         </div>
     )
 }
